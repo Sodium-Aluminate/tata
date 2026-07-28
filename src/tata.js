@@ -53,7 +53,7 @@ function type2Icon(type = 'text') {
     case 'error':
       return 'block'
     case 'ask':
-      return 'help_outline'  
+      return 'help_outline'
     default:
       return ''
   }
@@ -134,11 +134,11 @@ function removeElement(element) {
 }
 
 function render(title, text, opts) {
-  const id = randomId() 
+  const id = randomId()
   const icon = type2Icon(opts.type)
   const position = mapPostion(opts.position)
   const animate = mapAnimateIn(opts.animate, opts.position)
-  const ta = { title, text, opts, id }
+  const ta = {title, text, opts, id}
   const idx = tatas.findIndex(tata => tata.id === id)
   const prevTa = idx === 0 ? null : tatas[idx - 1]
   tatas.push(ta)
@@ -151,11 +151,11 @@ function render(title, text, opts) {
       <p class="tata-text">${text}</p>
     </div>
     ${opts.closeBtn || opts.holding ?
-      '<button class="tata-close material-icons">clear</button>' : ''
-    }
+    '<button class="tata-close material-icons">clear</button>' : ''
+  }
     ${!opts.holding && opts.progress ?
-      '<div class="tata-progress"></div>' : ''
-    }
+    '<div class="tata-progress"></div>' : ''
+  }
   </div>
  `
 
@@ -206,37 +206,37 @@ const defaultOpts = {
 
 
 export function text(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
-  const _opts = Object.assign({}, defaultOpts, opts, { type: 'text' })
+  const _opts = Object.assign({}, defaultOpts, opts, {type: 'text'})
   render(title, text, _opts)
 }
 
 export function log(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
-  const _opts = Object.assign({}, defaultOpts, opts, { type: 'log' })
+  const _opts = Object.assign({}, defaultOpts, opts, {type: 'log'})
   render(title, text, _opts)
 }
 
 export function info(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
-  const _opts = Object.assign({}, defaultOpts, opts, { type: 'info' })
+  const _opts = Object.assign({}, defaultOpts, opts, {type: 'info'})
   render(title, text, _opts)
 }
 
 export function warn(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
-  const _opts = Object.assign({}, defaultOpts, opts, { type: 'warn' })
+  const _opts = Object.assign({}, defaultOpts, opts, {type: 'warn'})
   render(title, text, _opts)
 }
 
 export function error(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
-  const _opts = Object.assign({}, defaultOpts, opts, { type: 'error' })
+  const _opts = Object.assign({}, defaultOpts, opts, {type: 'error'})
   render(title, text, _opts)
 }
 
 export function success(title = '你好', text = '今天是' + new Date().toLocaleString(), opts = {}) {
-  const _opts = Object.assign({}, defaultOpts, opts, { type: 'success' })
+  const _opts = Object.assign({}, defaultOpts, opts, {type: 'success'})
   render(title, text, _opts)
 }
 
 export function ask() {
-  const _opts = Object.assign({}, defaultOpts, opts, { type: 'ask' })
+  const _opts = Object.assign({}, defaultOpts, opts, {type: 'ask'})
   render(title, text, _opts)
 }
 
