@@ -59,7 +59,7 @@ const optionMaps = {
     }
 }
 
-function mapPosition(pos = 'tr'): string {
+function mapPosition(pos: Position = 'tr'): string {
     return optionMaps.position[pos] ?? 'top-right'
 }
 
@@ -67,7 +67,7 @@ function type2Icon(type = 'text'): string {
     return optionMaps.type2Icon[type] ?? ''
 }
 
-function mapAnimateIn(animate = 'fade', position = 'tr') {
+function mapAnimateIn(animate = 'fade', position: Position = 'tr') {
     if (animate !== 'slide') return 'fade-in'
     const direction = optionMaps.slideDirection[position]
     if (!direction) return 'fade-in'
