@@ -1,9 +1,10 @@
-const path = require('path')
-const webpack = require('webpack')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const path = require('path');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
-  entry: ['./src/tata.js'],
+  mode: 'production',
+  entry: './src/tata.ts',
   output: {
     filename: 'tata.js',
     path: path.resolve(__dirname, 'dist'),
@@ -11,7 +12,7 @@ module.exports = {
     libraryTarget: 'var'
   },
   target: 'web',
-  module: { 
+  module: {
     rules: [
       {
         test: /\.css$/,
@@ -20,20 +21,30 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
       {
-        test: /.js?$/,
-        include: [path.resolve(__dirname, 'src')],
-        exclude: [path.resolve(__dirname, 'node_modules')],
-        loader: 'babel-loader'
+        test: /\.(js|ts)$/,
+        include: path.resolve(__dirname, 'src'),
+        exclude: /node_modules/,
+        use: 'babel-loader'
       }
     ]
   },
+  resolve: {
+    extensions: ['.js', '.ts']
+  },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        drop_console: true
-      }
-    })
-  ]
-}
+    new CleanWebpackPlugin()
+  ],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            warnings: false,
+            drop_console: true
+          }
+        }
+      })
+    ]
+  }
+};
