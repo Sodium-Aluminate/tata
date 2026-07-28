@@ -13,90 +13,44 @@ function addIconsLink(href) {
 
 addIconsLink('https://fonts.googleapis.com/icon?family=Material+Icons')
 
-function mapPostion(pos = 'tr') {
-  switch (pos) {
-    case 'tr':
-      return 'top-right'
-    case 'tm':
-      return 'top-mid'
-    case 'tl':
-      return 'top-left'
-    case 'mr':
-      return 'mid-right'
-    case 'mm':
-      return 'mid-mid'
-    case 'ml':
-      return 'mid-left'
-    case 'br':
-      return 'bottom-right'
-    case 'bm':
-      return 'bottom-mid'
-    case 'bl':
-      return 'bottom-left'
-    default:
-      return 'top-right'
+const optionMaps = {
+  position: {
+    tr: 'top-right', tm: 'top-mid', tl: 'top-left',
+    mr: 'mid-right', mm: 'mid-mid', ml: 'mid-left',
+    br: 'bottom-right', bm: 'bottom-mid', bl: 'bottom-left'
+  },
+  type2Icon: {
+    text: 'chat_bubble', log: 'textsms', info: 'forum',
+    warn: 'info_outline', success: 'check', error: 'block',
+    ask: 'help_outline',
+  },
+  slideDirection: {
+    tr: 'right', mr: 'right', br: 'right',
+    tl: 'left', ml: 'left', bl: 'left',
+    tm: 'top', bm: 'bottom'
   }
+}
+
+function mapPostion(pos = 'tr') {
+  return optionMaps.position[pos] ?? 'top-right'
 }
 
 function type2Icon(type = 'text') {
-  switch (type) {
-    case 'text':
-      return 'chat_bubble'
-    case 'log':
-      return 'textsms'
-    case 'info':
-      return 'forum'
-    case 'warn':
-      return 'info_outline'
-    case 'success':
-      return 'check'
-    case 'error':
-      return 'block'
-    case 'ask':
-      return 'help_outline'
-    default:
-      return ''
-  }
+  return optionMaps.type2Icon[type] ?? ''
 }
 
 function mapAnimateIn(animate = 'fade', position = 'tr') {
-  if (animate === 'slide') {
-    switch (position) {
-      case 'tr':
-      case 'mr':
-      case 'br':
-        return 'slide-right-in'
-      case 'tl':
-      case 'ml':
-      case 'bl':
-        return 'slide-left-in'
-      case 'tm':
-        return 'slide-top-in'
-      case 'bm':
-        return 'slide-bottom-in'
-    }
-  }
-  return 'fade-in'
+  if (animate !== 'slide') return 'fade-in'
+  const direction = optionMaps.animateIn[position]
+  if (!direction) return 'fade-in'
+  return `slide-${direction}-in`
 }
 
 function mapAnimateOut(animate = 'fade', position = 'tr') {
-  if (animate === 'slide') {
-    switch (position) {
-      case 'tr':
-      case 'mr':
-      case 'br':
-        return 'slide-right-out'
-      case 'tl':
-      case 'ml':
-      case 'bl':
-        return 'slide-left-out'
-      case 'tm':
-        return 'slide-top-out'
-      case 'bm':
-        return 'slide-bottom-out'
-    }
-  }
-  return 'fade-out'
+  if (animate !== 'slide') return 'fade-out'
+  const direction = optionMaps.animateIn[position]
+  if (!direction) return 'fade-out'
+  return `slide-${direction}-out`
 }
 
 function clickTaTa(event) {
