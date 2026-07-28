@@ -1,4 +1,4 @@
-import tata from '../src/tata'
+import * as tata from '../src/tata'
 
 test('should render a prompt', () => {
   tata.success('test', 'test')
