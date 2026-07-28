@@ -1,8 +1,18 @@
 import './tata.css'
 
-function randomId() {
-  return `tata-${Date.now()}`
-}
+const genId = (() => {
+  let timeStamp = 0;
+  let count = 0;
+  return function () {
+    const time = Date.now();
+    if (time > timeStamp) {
+      timeStamp = time;
+      count = 0;
+    }
+    count++
+    return `tata-${time}-count`
+  }
+})()
 
 function addIconsLink(href) {
   const iconLink = document.createElement('link')
@@ -136,7 +146,7 @@ function removeElement(element) {
 }
 
 function render(title, text, opts) {
-  const id = randomId() 
+  const id = genId()
   const icon = type2Icon(opts.type)
   const position = mapPostion(opts.position)
   const animate = mapAnimateIn(opts.animate, opts.position)
