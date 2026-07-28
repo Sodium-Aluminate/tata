@@ -115,9 +115,7 @@ function closeTaTa(event) {
   element.classList.add(mapAnimateOut(ta.opts.animate, ta.opts.position))
   removeElement(element)
 
-  !!ta.opts.onClose &&
-    typeof ta.opts.onClose === 'function' &&
-    ta.opts.onClose.call(ta)
+  if (typeof ta.opts.onClose === 'function') ta.opts.onClose.call(ta)
 }
 
 document.addEventListener('click', closeTaTa, false)
@@ -170,12 +168,12 @@ function render(title, text, opts) {
 
   const element = document.getElementById(id)
 
-  !!opts.onClick &&
-    typeof opts.onClick === 'function' &&
+  if (typeof opts.onClick === 'function') {
     element.addEventListener('click', clickTaTa.bind(ta), {
       capture: true,
       once: true
     })
+  }
 
   if (!opts.holding && opts.progress) {
     const progress = element.querySelector('.tata-progress')
@@ -188,9 +186,7 @@ function render(title, text, opts) {
       console.log(performance.now())
       removeElement(element)
       clearTimeout(vanish)
-      !!ta.opts.onClose &&
-        typeof ta.opts.onClose === 'function' &&
-        ta.opts.onClose.call(ta)
+      if (typeof ta.opts.onClose === 'function') ta.opts.onClose.call(ta)
     }, opts.duration)
 
   }
